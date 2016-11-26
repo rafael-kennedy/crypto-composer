@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Crypto</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/photon.min.css"/>
+  </head>
+  <body>
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button type="button" name="crypto" onclick="btn.generate()">Generate New Key</button>
+
+      </div>
+    </div>
+    <div id="crypto">
+      <div class="publicKey">
+        <h1>PublicKey</h1>
+        <textarea id="publicKey" rows="8" cols="40" :value="publicKey"></textarea>
+
+      </div>
+      <div class="privateKey">
+        <h1>PrivateKey (to Sign)</h1>
+        <textarea id="privateKey" rows="8" cols="40" :value="privateKey"></textarea>
+
+      </div>
+    </div>
+
+  </body>
+  <script src="../js/crypto.js"></script>
+  <script src="../js/buttonFuncs.js"></script>
+
+</html>

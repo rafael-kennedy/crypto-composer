@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cryptoser</title>
+  <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/photon.min.css"/>
+</head>
+<body>
+  <div id="app">
+    <div class="toolbar">
+      <div class="toolbar-group btn-group">
+        <button type="button" class="btn btn-default" name="crypto" onclick="btn.crypto()"><span class="icon icon-lock"></span> Cryptography Settings</button>
+        <button type="button" class="btn btn-default" name="generate" onclick="btn.generate()"><span class="icon icon-key"></span> Generate New Key</button>
+      </div>
+    </div>
+    <div id="editor">
+      <div class="section north draggable">
+        <div class="toolbar">
+          <h1 class="title">PlainText</h1>
+          <button type="button" class="btn btn-default" name="savePlain" v-on:click="savePlain"><span class="icon icon-floppy"></span></button>
+        </div>
+        <textarea id="input" :value="content" @input="update">
+        </textarea>
+      </div>
+      <div class="section east">
+        <div class="toolbar">
+          <h1 class="title">MarkDown Preview</h1>
+          <button type="button" class="btn btn-default" name="savePlain" v-on:click="saveHTML"><span class="icon icon-floppy"></span></button>
+        </div>
+        <div id="output" v-html="output">
+        </div>
+      </div>
+    </div>
+    <div id="ciphertext">
+      <div class="section west">
+        <div class="toolbar">
+          <h1 class="title">Ciphertext</h1>
+          <button type="button" class="btn btn-default" name="export"><span class="icon icon-floppy"  v-on:click="saveCText"></span></button>
+        </div>
+        <textarea id="cipherPlain" :value="cipherPlain" @input="decrypt">
+        </textarea>
+      </div>
+      <div class="section south">
+        <div class="toolbar">
+          <h1 class="title">Encrypted HTML</h1>
+          <button type="button" class="btn btn-default" name="export"><span class="icon icon-floppy"  v-on:click="saveCHTML"></span></button>
+        </div>
+        <textarea id="cipherHTML" :value="cipherHTML">
+        </textarea>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../js/renderer.js"></script>
+<script src="../js/buttonFuncs.js"></script>
+
+</html>

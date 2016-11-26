@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Generate Keys</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/photon.min.css"/>
+  </head>
+  <body>
+    <div id="generator">
+      <div class="passphrase">
+        <h1>PassPhrase</h1>
+
+        <select class="bits" id="bits" v-model="bits">
+          <option value="512"> 512 </option>
+          <option value="1024"> 1024 </option>
+          <option value="2048"> 2048 </option>
+          <option value="4096"> 4096 </option>
+          <option value="8192"> 8192 </option>
+        </select>
+
+        <textarea id="passPhrase" rows="1" cols="40" value="publicKey" @input="passphrase"></textarea>
+
+      </div>
+      <div class="publicKey">
+        <h1>PublicKey</h1>
+        <textarea id="publicKey" rows="8" cols="40" :value="publicKey"></textarea>
+
+      </div>
+    </div>
+
+  </body>
+  <script src="../js/generate.js"></script>
+  <script src="../js/buttonFuncs.js"></script>
+</html>

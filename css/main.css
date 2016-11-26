@@ -1,0 +1,25 @@
+div#editor, div#ciphertext {
+  display: flex;
+}
+.section {
+    width: 40%;
+    margin: 2em 1em;
+    resize: both;
+    overflow: auto;
+}
+.toolbar h1 {
+  font-size: 10pt;
+}
+.section textarea {
+  min-height: 30em;
+  width: 100%;
+  resize: none;
+}
+
+code {
+  color: #f66;
+}
+
+.toolbar {
+  padding: 0.5em 2em;
+}

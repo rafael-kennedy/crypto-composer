@@ -12,6 +12,8 @@ let appicon
 
 global.cryptSettings = {
   obj: {},
+  aes:"",
+  cryptMode:"",
   publicKey: "",
   privateKey: "",
   passphrase: "",
@@ -22,7 +24,8 @@ global.cryptSettings = {
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600, icon: "images/icon.png"})
+  win = new BrowserWindow({icon: "images/icon.png"})
+  win.maximize()
 
   // and load the main.html of the app.
   win.loadURL(url.format({

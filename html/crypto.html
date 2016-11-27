@@ -10,19 +10,27 @@
     <div class="toolbar">
       <div class="toolbar-group">
         <button type="button" name="crypto" onclick="btn.generate()">Generate New Key</button>
-
       </div>
     </div>
     <div id="crypto">
+      <div class="type">
+        <select class="type" v-model="cryptMode" v-on:change="modeSelect">
+          <option value="rsa">Asymetric (RSA) Only</option>
+          <option value="aes">Symetric (AES) Only</option>
+          <option value="hybrid">Hybrid RSA Encrypted AES Key</option>
+        </select>
+      </div>
+      <div class="aes">
+        <button type="button" name="generateAES" @click="generateAES">Generate</button>
+        <textarea name="aes" rows="1" cols="40" v-model="aes" @change="modeSelect"></textarea>
+      </div>
       <div class="publicKey">
         <h1>PublicKey</h1>
         <textarea id="publicKey" rows="8" cols="40" :value="publicKey"></textarea>
-
       </div>
       <div class="privateKey">
-        <h1>PrivateKey (to Sign)</h1>
+        <h1>PrivateKey</h1>
         <textarea id="privateKey" rows="8" cols="40" :value="privateKey"></textarea>
-
       </div>
     </div>
 

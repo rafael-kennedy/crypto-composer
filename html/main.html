@@ -10,45 +10,86 @@
   <div id="app">
     <div class="toolbar">
       <div class="toolbar-group btn-group">
-        <button type="button" class="btn btn-default" name="crypto" onclick="btn.crypto()"><span class="icon icon-lock"></span> Cryptography Settings</button>
-        <button type="button" class="btn btn-default" name="generate" onclick="btn.generate()"><span class="icon icon-key"></span> Generate New Key</button>
+        <button type="button" class="btn btn-default" title="Cryptography Settings" onclick="btn.crypto()"><span class="icon icon-lock"></span></button>
+        <button type="button" class="btn btn-default" title="Generate New Key" onclick="btn.generate()"><span class="icon icon-key"></span></button>
+        <button type="button" class="btn btn-default" title="Load Settings" @click="openFile('settings')"><span class="icon icon-folder"></span> </button>
+        <button type="button" class="btn btn-default" title="Save Settings" @click="saveSettings"><span class="icon icon-floppy"></span></button>
+      </div>
+      <div class="toolbar-group btn-group">
+        <button type="button" class="btn btn-default" v-bind:class="{active: view.fourPanel}"
+        title="4 Panel layout" @click="viewButton('fourPanel')"><span class="icon icon-layout"></span></button>
+        <button type="button" class="btn btn-default" v-bind:class="{active: view.md}"
+        title="Markdown Preview Mode" @click="viewButton('md')"><span class="icon icon-newspaper"></span></button>
+        <button type="button" class="btn btn-default" v-bind:class="{active: view.editorOnly}"
+        title="Editor Only Mode" @click="viewButton('editorOnly')"><span class="icon icon-pencil"></span></button>
       </div>
     </div>
-    <div id="editor">
-      <div class="section north draggable">
-        <div class="toolbar">
-          <h1 class="title">PlainText</h1>
+
+    <!--  Primary four Panel display -->
+
+    <div class="fourPanel" v-bind:class="[view.fourPanel ? 'visible' : 'hidden']">
+      <div id="editor">
+        <div class="section north draggable">
+          <div class="toolbar">
+            <h1 class="title">PlainText</h1>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" name="savePlain" v-on:click="savePlain"><span class="icon icon-floppy"></span></button>
+              <button type="button" class="btn btn-default" name="export"><span class="icon icon-folder"  v-on:click="openFile('plain')"></span></button>
+            </div>
+          </div>
+          <textarea id="input" :value="content" @input="update">
+          </textarea>
+        </div>
+        <div class="section east">
+          <div class="toolbar">
+            <div class="btn-group">
+            <h1 class="title">MarkDown Preview</h1>
+            <button type="button" class="btn btn-default" name="savePlain" v-on:click="saveHTML"><span class="icon icon-floppy"></span></button>
+            <button type="button" class="btn btn-default" name="export"><span class="icon icon-folder"  v-on:click="openFile('plain')"></span></button>
+            </div>
+          </div>
+          <div id="output" v-html="output">
+          </div>
+        </div>
+      </div>
+      <div id="ciphertext">
+        <div class="section west">
+          <div class="toolbar">
+            <h1 class="title">Ciphertext</h1>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" name="export"><span class="icon icon-floppy"  v-on:click="saveCText"></span></button>
+              <button type="button" class="btn btn-default" name="export"><span class="icon icon-folder"  v-on:click="openFile('cText')"></span></button>
+
+            </div>
+          </div>
+          <textarea id="cipherPlain" :value="cipherPlain" @input="decrypt">
+          </textarea>
+        </div>
+        <div class="section south">
+          <div class="toolbar">
+            <h1 class="title">Encrypted HTML</h1>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" name="export"><span class="icon icon-floppy"  v-on:click="saveCHTML"></span></button>
+              <button type="button" class="btn btn-default" name="export"><span class="icon icon-folder"  v-on:click="openFile('cText')"></span></button>
+
+            </div>
+          </div>
+          <textarea id="cipherHTML" :value="cipherHTML">
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="md" v-bind:class="[view.md ? 'visible' : 'hidden']" v-html="output">
+
+    </div>
+    <div class="editorOnly" v-bind:class="[view.editorOnly ? 'visible' : 'hidden']">
+      <div class="toolbar">
+        <div class="btn-group">
           <button type="button" class="btn btn-default" name="savePlain" v-on:click="savePlain"><span class="icon icon-floppy"></span></button>
-        </div>
-        <textarea id="input" :value="content" @input="update">
-        </textarea>
-      </div>
-      <div class="section east">
-        <div class="toolbar">
-          <h1 class="title">MarkDown Preview</h1>
-          <button type="button" class="btn btn-default" name="savePlain" v-on:click="saveHTML"><span class="icon icon-floppy"></span></button>
-        </div>
-        <div id="output" v-html="output">
+          <button type="button" class="btn btn-default" name="export"><span class="icon icon-folder"  v-on:click="openFile('plain')"></span></button>
         </div>
       </div>
-    </div>
-    <div id="ciphertext">
-      <div class="section west">
-        <div class="toolbar">
-          <h1 class="title">Ciphertext</h1>
-          <button type="button" class="btn btn-default" name="export"><span class="icon icon-floppy"  v-on:click="saveCText"></span></button>
-        </div>
-        <textarea id="cipherPlain" :value="cipherPlain" @input="decrypt">
-        </textarea>
-      </div>
-      <div class="section south">
-        <div class="toolbar">
-          <h1 class="title">Encrypted HTML</h1>
-          <button type="button" class="btn btn-default" name="export"><span class="icon icon-floppy"  v-on:click="saveCHTML"></span></button>
-        </div>
-        <textarea id="cipherHTML" :value="cipherHTML">
-        </textarea>
-      </div>
+      <textarea class="editorOnly" :value="content" @input="editorOnlyUpdate"></textarea>
     </div>
   </div>
 </body>

@@ -1,11 +1,15 @@
+div#app {
+  height: 100%;
+}
+
 div#editor, div#ciphertext {
   display: flex;
 }
 .section {
-    width: 40%;
+  position: auto;
+    width: 45%;
     margin: 2em 1em;
     resize: both;
-    overflow: auto;
 }
 .toolbar h1 {
   font-size: 10pt;
@@ -20,6 +24,32 @@ code {
   color: #f66;
 }
 
-.toolbar {
-  padding: 0.5em 2em;
+.toolbar .btn-group {
+  margin: 0.5em 2em;
+}
+
+div.hidden {
+  display: none
+}
+
+.editorOnly textarea {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  div#output {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+  }
+
+.md {
+    margin: 1em 0 1em 2.5em;
+    padding-right: 2em;
+    overflow-y: auto;
+    height: 90%;
 }
